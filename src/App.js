@@ -39310,7 +39310,7 @@ export default function App() {
         <div className="max-w-screen-2xl mx-auto px-6 md:px-24 lg:px-32">
           <header class="py-12 flex justify-between">
             <div className="mr-6 block">
-              <Link to="/" className="text-2xl font-semibold">Aldeeran</Link>
+              <Link to="/" className="text-2xl font-semibold">Alderaan</Link>
               <div class="text-gray-400">NASA Contracts Explorer</div>
             </div>
             <ul class="flex list-none">
