@@ -25,6 +25,7 @@ export default function App() {
             <Route path="/reference" element={<Reference />} />
             <Route path="/FY22" element={<FY22 />} />
             <Route path="/FY21" element={<FY21 />} />
+            <Route path="/FY20" element={<FY20 />} />
           </Routes>
           <Footer />
         </div>
@@ -47,9 +48,6 @@ function Header() {
         <li class="ml-16 my-2">
           <Link to="/about">About</Link>
         </li>
-        <li class="ml-16 my-2">
-          <Link to="/FY22">FY22</Link>
-        </li>
       </ul>
     </header>
   )
@@ -60,7 +58,7 @@ function Home() {
   return (
     <div className="text-gray-900">
       <div className="mt-12">
-        Search through all government contracts awarded by NASA, from FY 2005 to FY 2022. Use the <strong>search</strong> tool to find matches with all data fields. You can also <strong>sort</strong> rows by ascending/descending order using the sort toggle. Go to the reference page for more information about the different data fields.</div>
+        Search through all government contracts awarded by NASA, from FY 2005 (starting October 1, 2004) to FY 2022 (ending September 30, 2022). Use the <strong>search</strong> tool to find matches with all data fields. You can also <strong>sort</strong> rows by ascending/descending order using the sort toggle. Go to the reference page for more information about the different data fields. This website was created to facilitate research involving NASA contracts.</div>
       <div className="mt-6 flex justify-between">
         <ul class="flex list-none">
           <li class="my-2">
@@ -136,14 +134,36 @@ function Reference() {
 }
 
 function About() {
-  return <h2>About</h2>;
+  return (
+    <div className="min-h-screen bg-gray-100 text-gray-900 mx-64">
+      <div className="font-semibold text-4xl">
+        About
+      </div>
+      <div className="mt-12">
+        <p>
+          Alderaan lets you search through all NASA contracts awarded to private and public contractors, from fiscal years 2005 to 2022 (updated to the latest data as it becomes available), from NASA's Acquisition Internet Service, <a href="https://prod.nais.nasa.gov/cgibin/nais/index.cgi">NAIS</a>.
+        </p>
+        <p class="mt-4">
+          This React app is based on a useful data visualization template by <a href="https://www.samuelliedtke.com/">Samuel Liedtke</a>.
+        </p>
+        <p class="mt-4">
+          Website developed by <a href="https://olafwillner.com">Olaf Willner</a>, April 2022.
+        </p>
+      </div>
+    </div>
+  )
 }
 
 function Footer() {
   return (
     <div class="font-ibm py-12 bg-gray-100 text-xs">
-      <div class="text-center">
-        Created by <a href="https://olafwillner.com">Olaf Willner</a>
+      <div class="flex justify-between">
+        <div>
+          <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>
+        </div>
+        <div>
+          Created by <a href="https://olafwillner.com">Olaf Willner</a>
+        </div>
       </div>
     </div>
   )
@@ -259,6 +279,67 @@ function FY21() {
   ], [])
 
   const data = React.useMemo(() => Contracts.getFY21(), [])
+
+  return (
+    <>
+      <Home />
+      <div className="mt-6">
+        <Table columns={columns} data={data} />
+      </div>
+    </>
+
+  )
+}
+
+function FY20() {
+  const columns = React.useMemo(() => [
+    {
+      Header: "Contractor",
+      accessor: "contractor",
+    },
+    {
+      Header: "Contract Number",
+      accessor: "contract_number",
+    },
+    {
+      Header: "NASA Center",
+      accessor: "center",
+    },
+    {
+      Header: "City",
+      accessor: "city",
+    },
+    {
+      Header: "State",
+      accessor: "state",
+    },
+    {
+      Header: "Award Date",
+      accessor: "award_date",
+    },
+    {
+      Header: "Completion Date",
+      accessor: "completion_date",
+    },
+    {
+      Header: "Current FY Obligations",
+      accessor: "current_fy_obligations",
+    },
+    {
+      Header: "Total Obligations",
+      accessor: "total_obligations",
+    },
+    {
+      Header: "Total Award Value",
+      accessor: "total_award_value",
+    },
+    {
+      Header: "Description of Contract",
+      accessor: "description",
+    },
+  ], [])
+
+  const data = React.useMemo(() => Contracts.getFY20(), [])
 
   return (
     <>
